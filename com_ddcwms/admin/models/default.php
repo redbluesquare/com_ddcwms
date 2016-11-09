@@ -1,7 +1,7 @@
 <?php // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' ); 
  
-class DdcshopboxModelsDefault extends JModelBase
+class DdcwmsModelsDefault extends JModelBase
 {
   protected $__state_set  = null;
   protected $_total       = null;
@@ -46,10 +46,10 @@ class DdcshopboxModelsDefault extends JModelBase
   		return false;
   	}
   
-  	$row->modified = $date;
-  	if ( !$row->created )
+  	$row->modified_on = $date;
+  	if ( !$row->created_on )
   	{
-  		$row->created = $date;
+  		$row->created_on = $date;
   	}
   
   	// Make sure the record is valid
@@ -227,39 +227,6 @@ class DdcshopboxModelsDefault extends JModelBase
    */
   protected function populateState()
   {
-  }
-  
-  public function setPostcode($user_id = null,$pc = null)
-  {
-  	
-  	if($user_id!=null)
-  	{
-  		//Get postcode is user is logged in
-  		$this->db = JFactory::getDBO();
-  		 
-  		$query = $this->db->getQuery(TRUE);
-  		$query->select('cd.postcode')
-  		->from('#__contact_details as cd')
-  		->where('cd.user_id = "'.$user_id.'"');
-  		$this->db->setQuery($query);
-  		$item = $this->db->loadObject();
-  	}
-  	if($item->postcode!=null)
-  	{
-  		$pc = $item->postcode;
-  	}
-  	
-  	//check if postcode is set
-  	if($pc!=null)
-  	{
-  		$pc1 = explode(' ', $pc);
-  		$pc1 = trim($pc1[0]);
-  	}
-  	
-  	//set session with fist half of postcode
-  	$this->session->set('postcode', $pc1);
-  	
-  	return true;
   }
   
 }

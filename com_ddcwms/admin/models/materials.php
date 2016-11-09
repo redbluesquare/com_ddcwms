@@ -1,12 +1,12 @@
 <?php // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' ); 
  
-class DdcshopboxModelsProducts extends DdcshopboxModelsDefault
+class DdcwmsModelsMaterials extends DdcwmsModelsDefault
 {
  
     //Define class level variables
   	var $_user_id     = null;
-  	var $_product_id  = null;
+  	var $_material_id  = null;
   	var $_cat_id	  = null;
   	var $_published   = 1;
 
@@ -17,7 +17,7 @@ class DdcshopboxModelsProducts extends DdcshopboxModelsDefault
 
     //If no User ID is set to current logged in user
     $this->_user_id = $app->input->get('profile_id', JFactory::getUser()->id);
-    $this->_product_id = $app->input->get('product_id', null);
+    $this->_material_id = $app->input->get('material_id', null);
 
     parent::__construct();       
   }
@@ -28,9 +28,9 @@ class DdcshopboxModelsProducts extends DdcshopboxModelsDefault
     $db = JFactory::getDBO();
     $query = $db->getQuery(TRUE);
 
-    $query->select('p.ddc_product_id');
-    $query->from('#__ddc_products as p');
-    $query->group("p.ddc_product_id");
+    $query->select('m.ddc_material_id');
+    $query->from('#__ddc_materials as m');
+    $query->group("p.ddc_material_id");
 
 
     return $query;
